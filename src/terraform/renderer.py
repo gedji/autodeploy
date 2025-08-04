@@ -346,6 +346,8 @@ provider "aws" {
     
     def _get_fallback_vm_config(self, spec: Dict[str, Any]) -> str:
         """Get fallback VM configuration when template is missing."""
+        default_user_data = '#!/bin/bash\necho "Hello World"'
+        user_data_script = spec.get('user_data_script', default_user_data)
         return f'''# EC2 Instance
 resource "aws_instance" "main" {{
   ami           = data.aws_ami.ubuntu.id
@@ -354,7 +356,7 @@ resource "aws_instance" "main" {{
   vpc_security_group_ids = [aws_security_group.main.id]
   
   user_data = <<-EOF
-{spec.get('user_data_script', '#!/bin/bash\necho "Hello World"')}
+{user_data_script}
   EOF
   
   tags = {{

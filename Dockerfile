@@ -7,4 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "src/main.py"]
+# Set Python path to handle imports correctly
+ENV PYTHONPATH=/workspace/src
+
+CMD ["sleep", "infinity"]
