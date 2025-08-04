@@ -66,3 +66,10 @@ working_dir/
 *.key
 *.pem
 config.json
+
+# Demo preparation (personal use only)
+DEMO_SCRIPT.md
+demo_notes.md
+video_prep.md
+*_demo_*
+*.loom

@@ -444,6 +444,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Documentation**: Check this README and inline code documentation
 - **🎮 Testing Guide**: See `TESTING_GUIDE.md` for step-by-step testing scenarios
 - **🚀 Technical Details**: See `SOLUTION.md` for technical implementation details
+- **🔮 Future Plans**: See `ROADMAP.md` for next steps and potential improvements
 
 ---
 
