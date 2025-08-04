@@ -16,6 +16,7 @@
 - **Cloud Cost Optimization**: Automatic cost comparison across providers
 
 ### 🤖 AI & Intelligence Enhancements
+- **GPT-4 Integration**: Upgrade from GPT-3.5-Turbo to GPT-4 for better accuracy
 - **GPT-4 Vision**: Parse infrastructure diagrams and convert to code
 - **Natural Language Monitoring**: Set up alerts using plain English
 - **Intelligent Recommendations**: ML-powered optimization suggestions

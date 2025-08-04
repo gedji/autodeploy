@@ -12,8 +12,9 @@ By the end of this guide, you'll understand how to:
 
 ### You Need:
 1. **A computer** (Windows, Mac, or Linux)
-2. **Docker Desktop** ([Download here](https://www.docker.com/products/docker-desktop/))
-3. **OpenAI Account** ([Sign up here](https://platform.openai.com/))
+2. **Python 3.8+** ([Download here](https://python.org)) - for local setup
+3. **Docker Desktop** ([Download here](https://www.docker.com/products/docker-desktop/)) - optional
+4. **OpenAI Account** ([Sign up here](https://platform.openai.com/)) with billing enabled
 
 ### Quick Setup:
 ```bash
@@ -21,11 +22,18 @@ By the end of this guide, you'll understand how to:
 git clone <repository>
 cd autodeploy
 
-# 2. Get your environment ready
+# 2. Set up environment
 cp .env.example .env
 # Edit .env file and add your OpenAI API key
 
-# 3. Start the magic
+# 3. Choose setup method
+# Method A: Local Python (Recommended)
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Mac/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+
+# Method B: Docker (Alternative)
 docker-compose up -d
 ```
 
@@ -35,7 +43,16 @@ docker-compose up -d
 
 **Your Goal**: Create a basic website that anyone can visit
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Deploy a simple website for my small business"
+
+# Mac/Linux
+.venv/bin/python src/main.py "Deploy a simple website for my small business"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py "Deploy a simple website for my small business"
 ```
@@ -54,7 +71,16 @@ docker-compose exec app python src/main.py "Deploy a simple website for my small
 
 **Your Goal**: Create an API that can handle 10 users or 10,000 users automatically
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Create an API that automatically scales with traffic"
+
+# Mac/Linux  
+.venv/bin/python src/main.py "Create an API that automatically scales with traffic"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py "Create an API that automatically scales with traffic"
 ```
@@ -73,7 +99,16 @@ docker-compose exec app python src/main.py "Create an API that automatically sca
 
 **Your Goal**: Deploy something for a bank or healthcare company
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Deploy a production application with maximum security and compliance"
+
+# Mac/Linux
+.venv/bin/python src/main.py "Deploy a production application with maximum security and compliance"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py "Deploy a production application with maximum security and compliance"
 ```
@@ -93,7 +128,16 @@ docker-compose exec app python src/main.py "Deploy a production application with
 
 **Your Goal**: Portfolio website that loads fast worldwide
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Deploy a portfolio website with global CDN for fast loading"
+
+# Mac/Linux
+.venv/bin/python src/main.py "Deploy a portfolio website with global CDN for fast loading"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py "Deploy a portfolio website with global CDN for fast loading"
 ```
@@ -112,7 +156,16 @@ docker-compose exec app python src/main.py "Deploy a portfolio website with glob
 
 **Your Goal**: E-commerce website with payment processing
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Deploy an e-commerce website with payment processing and inventory management"
+
+# Mac/Linux
+.venv/bin/python src/main.py "Deploy an e-commerce website with payment processing and inventory management"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py "Deploy an e-commerce website with payment processing and inventory management"
 ```
@@ -132,7 +185,16 @@ docker-compose exec app python src/main.py "Deploy an e-commerce website with pa
 
 **Your Goal**: See what would be created without actually creating it
 
-**Command**:
+**Local Python Commands**:
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py --dry-run "Deploy anything you want to test"
+
+# Mac/Linux
+.venv/bin/python src/main.py --dry-run "Deploy anything you want to test"
+```
+
+**Docker Command**:
 ```bash
 docker-compose exec app python src/main.py --dry-run "Deploy anything you want to test"
 ```
@@ -171,6 +233,13 @@ docker-compose exec app python src/main.py --dry-run "Deploy anything you want t
 
 ### Interactive Mode:
 ```bash
+# Local Python (Windows)
+.venv\Scripts\python.exe src/main.py --interactive
+
+# Local Python (Mac/Linux) 
+.venv/bin/python src/main.py --interactive
+
+# Docker
 docker-compose exec app python src/main.py --interactive
 ```
 Have a conversation with AutoDeploy!

@@ -35,15 +35,9 @@ autodeploy/
 
 ## 🚦 Quick Start (No DevOps Experience Required!)
 
-### 📋 What You Need
-
-1. **A computer** with internet connection (Windows, Mac, or Linux)
-2. **Docker Desktop** ([Download here](https://www.docker.com/products/docker-desktop/)) - This is like a "virtual computer" that runs our app
-3. **OpenAI Account** ([Sign up here](https://platform.openai.com/)) - For AI-powered text understanding
-
 ### 🎯 Step-by-Step Setup (5 minutes)
 
-#### Step 1: Install Docker Desktop
+#### Step 1: Install Docker Desktop (Optional)
 1. Download Docker Desktop from the link above
 2. Install it (may require restart)
 3. Open Docker Desktop - wait for it to start completely
@@ -54,6 +48,7 @@ autodeploy/
 3. Go to "API Keys" section
 4. Click "Create new secret key"
 5. **Copy this key** - you'll need it soon!
+6. **Add billing information** to your OpenAI account (required for API usage)
 
 #### Step 3: Download AutoDeploy
 ```bash
@@ -71,16 +66,26 @@ Open the `.env` file in any text editor and replace `your-openai-api-key-here` w
 OPENAI_API_KEY=sk-your-actual-key-here
 ```
 
-#### Step 5: Start AutoDeploy
-```bash
-# Start the application (this downloads and starts everything automatically)
-docker-compose up -d
+#### Step 5: Choose Your Setup Method
 
-# Wait about 30 seconds, then test if it's working
-docker-compose ps
+**Method A: Local Python (Recommended)**
+```bash
+# Setup Python virtual environment (Windows)
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Setup Python virtual environment (Mac/Linux)
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-You should see 3 services running: `app`, `terraform`, and `localstack`.
+**Method B: Docker (Alternative)**
+```bash
+# Start the application (downloads and starts everything automatically)
+docker-compose up -d
+```
 
 ## 🎮 Test Different Scenarios (Fun Part!)
 
@@ -88,6 +93,16 @@ You should see 3 services running: `app`, `terraform`, and `localstack`.
 
 **What you're doing**: Creating a complete web server for a Node.js website
 
+**Using Local Python:**
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Deploy a Node.js website on AWS using EC2 for production"
+
+# Mac/Linux  
+.venv/bin/python src/main.py "Deploy a Node.js website on AWS using EC2 for production"
+```
+
+**Using Docker:**
 ```bash
 docker-compose exec app python src/main.py "Deploy a Node.js website on AWS using EC2 for production"
 ```
@@ -103,71 +118,91 @@ docker-compose exec app python src/main.py "Deploy a Node.js website on AWS usin
 
 **What you're doing**: Creating an API that automatically scales up/down based on usage
 
+**Using Local Python:**
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py "Create a Python REST API using AWS Lambda with auto-scaling"
+
+# Mac/Linux
+.venv/bin/python src/main.py "Create a Python REST API using AWS Lambda with auto-scaling"
+```
+
+**Using Docker:**
 ```bash
 docker-compose exec app python src/main.py "Create a Python REST API using AWS Lambda with auto-scaling"
 ```
 
-**What happens**: AutoDeploy will:
-- Set up serverless functions (no servers to manage!)
-- Configure automatic scaling
-- Add API gateway for requests
-- Set up logging and monitoring
-
-### 🐳 Scenario 3: Deploy a Containerized App
-
-**What you're doing**: Deploying a Docker application with load balancing
-
-```bash
-docker-compose exec app python src/main.py "Deploy a Docker application on AWS ECS with load balancer"
-```
-
-**What happens**: AutoDeploy will:
-- Set up container orchestration
-- Configure load balancing for high availability
-- Add health checks
-- Set up auto-scaling
-
-### 🧪 Scenario 4: Test Mode (Safe Practice)
+### 🧪 Scenario 3: Test Mode (Safe Practice)
 
 **What you're doing**: Planning deployment without actually creating anything
 
+**Using Local Python:**
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py --dry-run "Deploy a React website with CDN"
+
+# Mac/Linux
+.venv/bin/python src/main.py --dry-run "Deploy a React website with CDN"
+```
+
+**Using Docker:**
 ```bash
 docker-compose exec app python src/main.py --dry-run "Deploy a React website with CDN"
 ```
 
-**What happens**: AutoDeploy will:
-- Show you exactly what would be created
-- Display cost estimates
-- Generate all configuration files
-- **But won't create any real infrastructure**
-
-### 💬 Scenario 5: Interactive Mode (Ask Questions)
+### 💬 Scenario 4: Interactive Mode (Ask Questions)
 
 **What you're doing**: Having a conversation with AutoDeploy
 
+**Using Local Python:**
+```bash
+# Windows
+.venv\Scripts\python.exe src/main.py --interactive
+
+# Mac/Linux
+.venv/bin/python src/main.py --interactive
+```
+
+**Using Docker:**
 ```bash
 docker-compose exec app python src/main.py --interactive
 ```
 
-**Example conversation**:
-```
-📝 Enter instruction: I want to deploy a blog website
-🤖 AutoDeploy: Great! What technology is your blog built with?
-📝 Enter instruction: WordPress
-🤖 AutoDeploy: Excellent! What environment? (development/staging/production)
-📝 Enter instruction: Production with high availability
-🚀 Processing your request...
+### � Test Without API Key
+
+**What you're doing**: Testing core components without OpenAI API
+
+```bash
+# Windows
+.venv\Scripts\python.exe test_autodeploy.py
+
+# Mac/Linux
+.venv/bin/python test_autodeploy.py
 ```
 
 ## 🎯 More Test Scenarios
 
 ### For E-commerce
 ```bash
+# Local Python (Windows)
+.venv\Scripts\python.exe src/main.py "Deploy a production e-commerce site with database and payment processing"
+
+# Local Python (Mac/Linux)
+.venv/bin/python src/main.py "Deploy a production e-commerce site with database and payment processing"
+
+# Docker
 docker-compose exec app python src/main.py "Deploy a production e-commerce site with database and payment processing"
 ```
 
 ### For Mobile App Backend
 ```bash
+# Local Python (Windows)
+.venv\Scripts\python.exe src/main.py "Create a mobile app backend API with user authentication"
+
+# Local Python (Mac/Linux)
+.venv/bin/python src/main.py "Create a mobile app backend API with user authentication"
+
+# Docker
 docker-compose exec app python src/main.py "Create a mobile app backend API with user authentication"
 ```
 
@@ -364,11 +399,40 @@ All dependencies run in Docker containers, ensuring consistent behavior across p
 2. Check that `.env` file has: `OPENAI_API_KEY=sk-your-key-here`
 3. No spaces around the `=` sign
 
-### 🐳 "Docker is not running" 
+### � "I'm getting a quota/billing error"
+**Solution**:
+1. Go to [OpenAI Billing](https://platform.openai.com/settings/organization/billing)
+2. Add a payment method
+3. Purchase credits ($5-10 is plenty for testing)
+4. Wait a few minutes for activation
+
+### 🐍 "Python command not found"
+**Solution**:
+1. **Windows**: Use `python` instead of `python3`
+2. **Mac/Linux**: Use `python3` or install Python from [python.org](https://python.org)
+3. Make sure virtual environment is activated
+
+### �🐳 "Docker is not running" 
 **Solution**:
 1. Open Docker Desktop application
 2. Wait for the whale icon to stop spinning
 3. Try your command again
+
+### 🔧 "Virtual environment issues"
+**Solution**:
+```bash
+# Clean setup (Windows)
+rmdir /s .venv
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Clean setup (Mac/Linux)
+rm -rf .venv
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 ### 💸 "I'm worried about costs"
 **Don't worry!** 
@@ -377,9 +441,12 @@ All dependencies run in Docker containers, ensuring consistent behavior across p
 - OpenAI API costs are typically under $1 for testing
 
 ### ⏰ "It's taking forever"
-**This is normal for first time**:
-- Docker downloads images (one-time, ~5-10 minutes)
+**For Docker**: 
+- First time downloads images (one-time, ~5-10 minutes)
 - Subsequent runs are much faster (30 seconds)
+
+**For Local Python**:
+- Usually very fast (under 30 seconds)
 
 ### 🤔 "I don't understand the output"
 **That's okay!** The important parts:
@@ -388,9 +455,10 @@ All dependencies run in Docker containers, ensuring consistent behavior across p
 - 📄 File names = Infrastructure components created
 
 ### 🆘 Still Stuck?
-1. **Check if Docker is running**: `docker-compose ps`
-2. **Restart everything**: `docker-compose down && docker-compose up -d`
-3. **Check logs**: `docker-compose logs app`
+1. **Check Python environment**: Make sure virtual environment is activated
+2. **Test core components**: Run `python test_autodeploy.py`
+3. **Check OpenAI billing**: Ensure account has credits
+4. **Try local instead of Docker**: Often simpler and more reliable
 
 ## 🎓 Learning More
 

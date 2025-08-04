@@ -6,11 +6,18 @@
 git clone <repository>
 cd autodeploy
 
-# 2. Add your OpenAI API key
+# 2. Add your OpenAI API key (and ensure billing is set up)
 cp .env.example .env
 # Edit .env file: OPENAI_API_KEY=your-key-here
 
-# 3. Start everything
+# 3. Choose your method
+# Method A: Local Python (Recommended)
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Mac/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+
+# Method B: Docker (Alternative)
 docker-compose up -d
 ```
 
@@ -18,38 +25,47 @@ docker-compose up -d
 
 **🌐 Test 1: Simple Website**
 ```bash
+# Local Python (Windows)
+.venv\Scripts\python.exe src/main.py "Deploy a simple website on AWS"
+
+# Local Python (Mac/Linux)
+.venv/bin/python src/main.py "Deploy a simple website on AWS"
+
+# Docker
 docker-compose exec app python src/main.py "Deploy a simple website on AWS"
 ```
 *Creates: Web server, security rules, monitoring*
 
 **🚀 Test 2: Scalable API**
 ```bash
-docker-compose exec app python src/main.py "Create an API that handles lots of users"
+# Use same pattern as above with different instruction:
+"Create an API that handles lots of users"
 ```
 *Creates: Serverless functions, auto-scaling, load balancers*
 
 **🛡️ Test 3: Secure Production App**
 ```bash
-docker-compose exec app python src/main.py "Deploy a production app with maximum security"
+"Deploy a production app with maximum security"
 ```
 *Creates: Encrypted storage, backups, monitoring, alerts*
 
 **🧪 Test 4: Safe Practice Mode**
 ```bash
-docker-compose exec app python src/main.py --dry-run "Deploy anything you want"
+# Add --dry-run to any command for safe testing
+.venv\Scripts\python.exe src/main.py --dry-run "Deploy anything you want"
 ```
 *Shows what would be created without actually creating it*
 
 ## 💡 Example Usage (Copy & Paste These!)rview
 
-AutoDeploy converts natural language instructions into deployable cloud infrastructure using OpenAI GPT-4 and Terraform. This solution is completely OS-agnostic and designed for easy reproduction.
+AutoDeploy converts natural language instructions into deployable cloud infrastructure using OpenAI GPT-3.5-Turbo and Terraform. This solution is completely OS-agnostic and designed for easy reproduction.
 
 ## 🎯 Core Features
 
-- **Natural Language Processing**: Converts plain English to infrastructure specifications
+- **Natural Language Processing**: Converts plain English to infrastructure specifications using GPT-3.5-Turbo
 - **Intelligent Analysis**: Optimizes resources based on environment and framework
 - **Multi-Pattern Support**: VMs, serverless functions, and containers
-- **Cross-Platform**: Runs identically on Windows, macOS, and Linux via Docker
+- **Dual Deployment Options**: Local Python environment or Docker containers
 - **Production-Ready**: Includes security, monitoring, and best practices
 
 ## �️ Architecture
@@ -145,7 +161,7 @@ docker-compose exec app python src/main.py "Deploy a Node.js app on AWS"
 ## 🔧 Technical Implementation
 
 ### 1. Natural Language Parsing
-- Uses OpenAI GPT-4 to extract deployment specifications
+- Uses OpenAI GPT-3.5-Turbo to extract deployment specifications
 - Handles various phrasings and technical requirements
 - Returns structured JSON with framework, cloud, infrastructure type
 
@@ -161,16 +177,16 @@ docker-compose exec app python src/main.py "Deploy a Node.js app on AWS"
 
 ### 4. Deployment Orchestration
 - Complete pipeline from instruction to deployed infrastructure
-- Containerized Terraform execution for consistency
+- Support for both local Python and containerized execution
 - LocalStack integration for safe local testing
 
 ## 🌍 Cross-Platform Compatibility
 
 **Works on any OS because:**
-- All dependencies run in Docker containers
-- No local environment configuration required
-- Consistent behavior across platforms
-- Simple setup with just Docker + API key
+- **Local Python**: Native execution on Windows, macOS, and Linux
+- **Docker option**: Containerized execution for consistent behavior
+- **No local dependencies**: All requirements managed via pip or Docker
+- **Simple setup**: Just Python + API key or Docker + API key
 
 ## 🔒 Production Features
 
