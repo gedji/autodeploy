@@ -20,7 +20,10 @@ from pathlib import Path
 # Add src directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-from deployer import deploy_from_instruction, ContainerizedDeployer, InfrastructureDeployer
+try:
+    from deployer import deploy_from_instruction, ContainerizedDeployer, InfrastructureDeployer
+except ImportError:
+    from .deployer import deploy_from_instruction, ContainerizedDeployer, InfrastructureDeployer
 
 
 def setup_logging(verbose: bool = False):

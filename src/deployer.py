@@ -11,9 +11,14 @@ from pathlib import Path
 from typing import Dict, Any, Optional
 import logging
 
-from .parser import InstructionParser
-from .analyzer import InfrastructureAnalyzer
-from .terraform.renderer import TerraformRenderer
+try:
+    from .parser import InstructionParser
+    from .analyzer import InfrastructureAnalyzer
+    from .terraform.renderer import TerraformRenderer
+except ImportError:
+    from parser import InstructionParser
+    from analyzer import InfrastructureAnalyzer
+    from terraform.renderer import TerraformRenderer
 
 logger = logging.getLogger(__name__)
 
